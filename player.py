@@ -1,5 +1,6 @@
 from circleshape import *
 from constants import *
+from pathlib import Path
 from shot import *
 
 class Player(CircleShape):
@@ -7,6 +8,31 @@ class Player(CircleShape):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.timer = 0
+
+        asset_path = Path(__file__).resolve().parent / PLAYER_IMAGE_PATH
+        try:
+            self.original_image = pygame.image.load(asset_path).convert_alpha()
+        except pygame.error:
+            self.original_image = None
+
+        if self.original_image is not None:
+            bounding = self.original_image.get_bounding_rect()
+            if bounding.width and bounding.height:
+                self.original_image = self.original_image.subsurface(bounding).copy()
+                self.original_image = pygame.transform.rotate(self.original_image, 180)
+
+            diameter = PLAYER_RADIUS * 2
+            image_width, image_height = self.original_image.get_size()
+            scale = min(diameter / image_width, diameter / image_height)
+            if scale != 1:
+                size = (
+                    max(1, int(image_width * scale)),
+                    max(1, int(image_height * scale)),
+                )
+                self.original_image = pygame.transform.smoothscale(self.original_image, size)
+            self.image = self.original_image
+        else:
+            self.image = None
 
     # in the player class
     def triangle(self):
@@ -18,7 +44,12 @@ class Player(CircleShape):
         return [a, b, c]
     
     def draw(self, screen):
-        pygame.draw.polygon(screen, color="white", points=self.triangle(), width=2)
+        if self.image is not None:
+            rotated = pygame.transform.rotate(self.original_image, -self.rotation)
+            rect = rotated.get_rect(center=self.position)
+            screen.blit(rotated, rect)
+        else:
+            pygame.draw.polygon(screen, color="white", points=self.triangle(), width=2)
 
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt

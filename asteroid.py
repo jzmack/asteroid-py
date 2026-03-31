@@ -12,6 +12,10 @@ class Asteroid(CircleShape):
     
     def update(self, dt):
         self.position += self.velocity * dt
+
+    def point_value(self):
+        value = int(ASTEROID_SCORE_BASE * ASTEROID_MAX_RADIUS / self.radius)
+        return max(value, 1)
     
     def split(self):
         self.kill()

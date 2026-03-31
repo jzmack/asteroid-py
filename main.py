@@ -49,7 +49,7 @@ def main():
                 if asteroid.collision(shot):
                     shot.kill()
                     asteroid.split()
-                    scoreboard.add(ASTEROID_SCORE_VALUE)
+                    scoreboard.add(asteroid.point_value())
 
         screen.fill(color="black")
 
