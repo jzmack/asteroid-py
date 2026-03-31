@@ -5,6 +5,7 @@ from player import *
 from asteroid import *
 from asteroidfield import *
 from shot import *
+from scoreboard import Scoreboard
 
 def main():
     print(f"Starting Asteroids with pygame version {pygame.version.ver}")
@@ -12,6 +13,7 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
     pygame.init()
 
+    scoreboard = Scoreboard()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
@@ -34,23 +36,26 @@ def main():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                scoreboard.save_high_score()
                 return
         updatable.update(dt)
 
         for asteroid in asteroids:
             if asteroid.collision(player):
+                scoreboard.save_high_score()
                 print("Game over!")
                 sys.exit()
             for shot in shots:
                 if asteroid.collision(shot):
                     shot.kill()
                     asteroid.split()
+                    scoreboard.add(ASTEROID_SCORE_VALUE)
 
         screen.fill(color="black")
 
-
         for thing in drawable:
             thing.draw(screen)
+        scoreboard.draw(screen)
         dt = clock.tick(60) / 1000
 
         pygame.display.flip()

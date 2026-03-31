@@ -8,3 +8,6 @@ wheels/
 
 # Virtual environments
 .venv
+
+# highscore file
+high_score.txt
