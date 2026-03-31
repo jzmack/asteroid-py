@@ -14,7 +14,7 @@ PLAYER_SHOOT_COOLDOWN = 0.3
 
 SHOT_RADIUS = 5
 PLAYER_IMAGE_PATH = "assets/player_images/spaceship1.png"
-ASTEROID_IMAGE_PATH = "assets/asteroid_images/asteroid1.png"
+ASTEROID_IMAGE_PATH = "assets/asteroid_images/asteroid2.png"
 
 SCORE_FONT_SIZE = 24
 SCORE_COLOR = "white"
