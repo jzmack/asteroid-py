@@ -13,7 +13,7 @@ PLAYER_SHOOT_SPEED = 500
 PLAYER_SHOOT_COOLDOWN = 0.3
 
 SHOT_RADIUS = 5
-PLAYER_IMAGE_PATH = "assets/player_images/spaceship1.png"
+PLAYER_IMAGE_PATH = "assets/player_images/spaceship2.png"
 ASTEROID_IMAGE_PATH = "assets/asteroid_images/asteroid2.png"
 SHOT_IMAGE_PATH = "assets/shot_images/shot1.png"
 
