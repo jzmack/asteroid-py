@@ -19,12 +19,6 @@ From the project root:
 cd /path/to/asteroids-py # update with real path
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -e .
-```
-
-If you prefer not to install in editable mode, run:
-
-```bash
 pip install pygame==2.6.1
 ```
 
