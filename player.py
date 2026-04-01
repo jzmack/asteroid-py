@@ -78,4 +78,5 @@ class Player(CircleShape):
             return
         self.timer = PLAYER_SHOOT_COOLDOWN
         shot = Shot(self.position.x, self.position.y)
+        shot.rotation = self.rotation  # offset for 180° player image rotation
         shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
