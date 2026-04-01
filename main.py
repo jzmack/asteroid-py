@@ -6,6 +6,7 @@ from asteroid import *
 from asteroidfield import *
 from shot import *
 from scoreboard import Scoreboard
+from logger import log_state
 
 def main():
     print(f"Starting Asteroids with pygame version {pygame.version.ver}")
@@ -34,6 +35,7 @@ def main():
     Shot.containers = (shots, updatable, drawable)
 
     while True:
+        log_state()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 scoreboard.save_high_score()
